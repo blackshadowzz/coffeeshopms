@@ -1,6 +1,6 @@
 ﻿namespace coffeeshopms
 {
-    partial class btnUnitTotalPrice
+    partial class formViewOrder
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMenuID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbUnitPayRiel = new System.Windows.Forms.Label();
             this.lbPayTotalRiel = new System.Windows.Forms.Label();
@@ -60,13 +67,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.cbOrderBy = new System.Windows.Forms.ComboBox();
             this.btnBack = new System.Windows.Forms.Button();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMenuID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colImage = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnPrintInvoice = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picOrdering)).BeginInit();
@@ -98,6 +99,69 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // colID
+            // 
+            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colID.FillWeight = 70F;
+            this.colID.HeaderText = "ID";
+            this.colID.MinimumWidth = 6;
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Width = 70;
+            // 
+            // colName
+            // 
+            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colName.FillWeight = 76.98829F;
+            this.colName.HeaderText = "Name";
+            this.colName.MinimumWidth = 6;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.Width = 140;
+            // 
+            // colMenuID
+            // 
+            this.colMenuID.FillWeight = 4.966988F;
+            this.colMenuID.HeaderText = "MenuID";
+            this.colMenuID.MinimumWidth = 6;
+            this.colMenuID.Name = "colMenuID";
+            this.colMenuID.ReadOnly = true;
+            // 
+            // colQty
+            // 
+            this.colQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colQty.HeaderText = "Qty";
+            this.colQty.MinimumWidth = 6;
+            this.colQty.Name = "colQty";
+            this.colQty.ReadOnly = true;
+            this.colQty.Width = 80;
+            // 
+            // colPrice
+            // 
+            this.colPrice.FillWeight = 4.966988F;
+            this.colPrice.HeaderText = "Price";
+            this.colPrice.MinimumWidth = 6;
+            this.colPrice.Name = "colPrice";
+            this.colPrice.ReadOnly = true;
+            // 
+            // colTotal
+            // 
+            this.colTotal.FillWeight = 4.966988F;
+            this.colTotal.HeaderText = "Total Price";
+            this.colTotal.MinimumWidth = 6;
+            this.colTotal.Name = "colTotal";
+            this.colTotal.ReadOnly = true;
+            // 
+            // colImage
+            // 
+            this.colImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.colImage.FillWeight = 160F;
+            this.colImage.HeaderText = "Image";
+            this.colImage.MinimumWidth = 6;
+            this.colImage.Name = "colImage";
+            this.colImage.ReadOnly = true;
+            this.colImage.Width = 140;
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -116,7 +180,7 @@
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.txtTotalDiscount);
             this.panel4.Controls.Add(this.label7);
-            this.panel4.Location = new System.Drawing.Point(785, 317);
+            this.panel4.Location = new System.Drawing.Point(747, 315);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(616, 252);
             this.panel4.TabIndex = 15;
@@ -287,7 +351,7 @@
             // 
             // btnSaveRecord
             // 
-            this.btnSaveRecord.Location = new System.Drawing.Point(1243, 575);
+            this.btnSaveRecord.Location = new System.Drawing.Point(1205, 571);
             this.btnSaveRecord.Name = "btnSaveRecord";
             this.btnSaveRecord.Size = new System.Drawing.Size(158, 40);
             this.btnSaveRecord.TabIndex = 29;
@@ -299,7 +363,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(787, 217);
+            this.label6.Location = new System.Drawing.Point(749, 215);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 25);
             this.label6.TabIndex = 28;
@@ -307,7 +371,7 @@
             // 
             // rbRemark
             // 
-            this.rbRemark.Location = new System.Drawing.Point(934, 214);
+            this.rbRemark.Location = new System.Drawing.Point(896, 212);
             this.rbRemark.Name = "rbRemark";
             this.rbRemark.Size = new System.Drawing.Size(204, 82);
             this.rbRemark.TabIndex = 27;
@@ -316,7 +380,7 @@
             // txtQty
             // 
             this.txtQty.Enabled = false;
-            this.txtQty.Location = new System.Drawing.Point(934, 172);
+            this.txtQty.Location = new System.Drawing.Point(896, 170);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(204, 30);
             this.txtQty.TabIndex = 24;
@@ -325,7 +389,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(787, 175);
+            this.label4.Location = new System.Drawing.Point(749, 173);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 25);
             this.label4.TabIndex = 23;
@@ -334,7 +398,7 @@
             // txtUnitPrice
             // 
             this.txtUnitPrice.Enabled = false;
-            this.txtUnitPrice.Location = new System.Drawing.Point(934, 130);
+            this.txtUnitPrice.Location = new System.Drawing.Point(896, 128);
             this.txtUnitPrice.Name = "txtUnitPrice";
             this.txtUnitPrice.Size = new System.Drawing.Size(204, 30);
             this.txtUnitPrice.TabIndex = 22;
@@ -343,7 +407,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(787, 133);
+            this.label3.Location = new System.Drawing.Point(749, 131);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 25);
             this.label3.TabIndex = 21;
@@ -352,7 +416,7 @@
             // txtItemName
             // 
             this.txtItemName.Enabled = false;
-            this.txtItemName.Location = new System.Drawing.Point(934, 88);
+            this.txtItemName.Location = new System.Drawing.Point(896, 86);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(204, 30);
             this.txtItemName.TabIndex = 20;
@@ -361,7 +425,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(787, 91);
+            this.label2.Location = new System.Drawing.Point(749, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 25);
             this.label2.TabIndex = 19;
@@ -370,7 +434,7 @@
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(934, 6);
+            this.txtID.Location = new System.Drawing.Point(896, 4);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(204, 30);
             this.txtID.TabIndex = 18;
@@ -379,7 +443,7 @@
             // 
             this.picOrdering.BackgroundImage = global::coffeeshopms.Properties.Resources.image_not_found_1_scaled_1150x647;
             this.picOrdering.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picOrdering.Location = new System.Drawing.Point(1159, 6);
+            this.picOrdering.Location = new System.Drawing.Point(1121, 4);
             this.picOrdering.Name = "picOrdering";
             this.picOrdering.Size = new System.Drawing.Size(242, 241);
             this.picOrdering.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -390,7 +454,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(787, 9);
+            this.label1.Location = new System.Drawing.Point(749, 7);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 25);
             this.label1.TabIndex = 16;
@@ -400,7 +464,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(787, 50);
+            this.label11.Location = new System.Drawing.Point(749, 48);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 25);
             this.label11.TabIndex = 30;
@@ -409,90 +473,37 @@
             // cbOrderBy
             // 
             this.cbOrderBy.FormattingEnabled = true;
-            this.cbOrderBy.Location = new System.Drawing.Point(934, 47);
+            this.cbOrderBy.Location = new System.Drawing.Point(896, 45);
             this.cbOrderBy.Name = "cbOrderBy";
             this.cbOrderBy.Size = new System.Drawing.Size(204, 33);
             this.cbOrderBy.TabIndex = 31;
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(6, 575);
+            this.btnBack.Location = new System.Drawing.Point(6, 571);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(114, 40);
+            this.btnBack.Size = new System.Drawing.Size(166, 40);
             this.btnBack.TabIndex = 32;
-            this.btnBack.Text = "Back";
+            this.btnBack.Text = "Back To Order";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // colID
+            // btnPrintInvoice
             // 
-            this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colID.FillWeight = 70F;
-            this.colID.HeaderText = "ID";
-            this.colID.MinimumWidth = 6;
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Width = 70;
+            this.btnPrintInvoice.Location = new System.Drawing.Point(1052, 571);
+            this.btnPrintInvoice.Name = "btnPrintInvoice";
+            this.btnPrintInvoice.Size = new System.Drawing.Size(126, 40);
+            this.btnPrintInvoice.TabIndex = 33;
+            this.btnPrintInvoice.Text = "Print Invoice";
+            this.btnPrintInvoice.UseVisualStyleBackColor = true;
             // 
-            // colName
-            // 
-            this.colName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colName.FillWeight = 76.98829F;
-            this.colName.HeaderText = "Name";
-            this.colName.MinimumWidth = 6;
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            this.colName.Width = 140;
-            // 
-            // colMenuID
-            // 
-            this.colMenuID.FillWeight = 4.966988F;
-            this.colMenuID.HeaderText = "MenuID";
-            this.colMenuID.MinimumWidth = 6;
-            this.colMenuID.Name = "colMenuID";
-            this.colMenuID.ReadOnly = true;
-            // 
-            // colQty
-            // 
-            this.colQty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colQty.HeaderText = "Qty";
-            this.colQty.MinimumWidth = 6;
-            this.colQty.Name = "colQty";
-            this.colQty.ReadOnly = true;
-            this.colQty.Width = 80;
-            // 
-            // colPrice
-            // 
-            this.colPrice.FillWeight = 4.966988F;
-            this.colPrice.HeaderText = "Price";
-            this.colPrice.MinimumWidth = 6;
-            this.colPrice.Name = "colPrice";
-            this.colPrice.ReadOnly = true;
-            // 
-            // colTotal
-            // 
-            this.colTotal.FillWeight = 4.966988F;
-            this.colTotal.HeaderText = "Total Price";
-            this.colTotal.MinimumWidth = 6;
-            this.colTotal.Name = "colTotal";
-            this.colTotal.ReadOnly = true;
-            // 
-            // colImage
-            // 
-            this.colImage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.colImage.FillWeight = 160F;
-            this.colImage.HeaderText = "Image";
-            this.colImage.MinimumWidth = 6;
-            this.colImage.Name = "colImage";
-            this.colImage.ReadOnly = true;
-            this.colImage.Width = 140;
-            // 
-            // btnUnitTotalPrice
+            // formViewOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(31)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(1410, 623);
+            this.ClientSize = new System.Drawing.Size(1374, 615);
+            this.Controls.Add(this.btnPrintInvoice);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.cbOrderBy);
             this.Controls.Add(this.label11);
@@ -514,7 +525,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "btnUnitTotalPrice";
+            this.Name = "formViewOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "formViewOrder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.btnUnitTotalPrice_FormClosing);
@@ -569,5 +580,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
         private System.Windows.Forms.DataGridViewImageColumn colImage;
+        private System.Windows.Forms.Button btnPrintInvoice;
     }
 }

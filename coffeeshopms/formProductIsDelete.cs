@@ -109,5 +109,10 @@ namespace coffeeshopms
                 txtSearch.Clear();
             }
         }
+
+        private void btnRestoreAll_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

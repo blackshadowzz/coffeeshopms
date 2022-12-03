@@ -59,7 +59,7 @@ namespace coffeeshopms
 
                     tableLayoutPanel1.Controls.Add(item, c, r);
                     c++;
-                    if(c > 2)
+                    if(c > 5)
                     {
                         c = 1;
                         r++;
@@ -75,6 +75,7 @@ namespace coffeeshopms
             {
                 conn.Close();
             }
+
             orderControl.Rows = order.getRow();
         }
 
@@ -82,11 +83,12 @@ namespace coffeeshopms
         {
             
         }
-        private btnUnitTotalPrice order = new btnUnitTotalPrice();
+        formViewOrder order = new formViewOrder();
         private void btnViewOrder_Click(object sender, EventArgs e)
         {
-           
+
             order.ShowDialog();
+            this.Close();
         }
 
         private void btnBack_Click(object sender, EventArgs e)

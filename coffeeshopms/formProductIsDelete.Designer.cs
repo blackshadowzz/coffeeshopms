@@ -140,6 +140,7 @@
             this.btnRestoreAll.TabIndex = 10;
             this.btnRestoreAll.Text = "Restore All";
             this.btnRestoreAll.UseVisualStyleBackColor = false;
+            this.btnRestoreAll.Click += new System.EventHandler(this.btnRestoreAll_Click);
             // 
             // btnBack
             // 

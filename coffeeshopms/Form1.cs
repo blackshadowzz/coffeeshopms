@@ -74,5 +74,10 @@ namespace coffeeshopms
             }
             
         }
+
+        private void formUserLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

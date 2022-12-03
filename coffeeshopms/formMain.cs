@@ -36,8 +36,10 @@ namespace coffeeshopms
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-            
+            formUserLogin l = new formUserLogin();
+            l.Show();
+            this.Hide();
+
         }
 
         private void formMain_FormClosed(object sender, FormClosedEventArgs e)

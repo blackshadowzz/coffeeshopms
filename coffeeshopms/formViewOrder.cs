@@ -12,9 +12,9 @@ using System.IO;
 
 namespace coffeeshopms
 {
-    public partial class btnUnitTotalPrice : Form
+    public partial class formViewOrder : Form
     {
-        public btnUnitTotalPrice()
+        public formViewOrder()
         {
             InitializeComponent();
         }
@@ -111,8 +111,13 @@ namespace coffeeshopms
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            btnAllPrice.Enabled = true;
-            this.Close();
+            if(MessageBox.Show("Please save all record before back to new order","Save Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                formOrder o = new formOrder();
+                o.Close();
+                this.Close();
+            }
+
         }
 
         private void btnUnitTotalPrice_FormClosing(object sender, FormClosingEventArgs e)
@@ -173,50 +178,74 @@ namespace coffeeshopms
         //}
         private void btnSaveRecord_Click(object sender, EventArgs e)
         {
-            try
+            if (txtID.Text == "")
             {
-                conn.Open();
-                MemoryStream ms = new MemoryStream();
-                //save into 
-                picOrdering.Image.Save(ms, picOrdering.Image.RawFormat);
-                string query = "Insert Into tbOrderDetail(itemID,orderID,Qty,Price,Discount,Photo,Payment,Remark,SaleBy) Values(@itemID,@orderID,@Qty,@Price,@Discount,@Photo,@Payment,@Remark,@SaleBy)";
-                SqlCommand cmd=new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@itemID",int.Parse(txtID.Text));
-                cmd.Parameters.AddWithValue("@orderID",cbOrderBy.SelectedValue);
-                cmd.Parameters.AddWithValue("@Qty", int.Parse(txtQty.Text));
-                cmd.Parameters.AddWithValue("@Price",decimal.Parse(txtUnitPrice.Text.Replace("$","")));
-                cmd.Parameters.AddWithValue("@Discount",decimal.Parse( txtDiscountUnit.Text));
-                cmd.Parameters.AddWithValue("@Photo", ms.ToArray());
-                cmd.Parameters.AddWithValue("@Payment",decimal.Parse( lbUnitPayDollar.Text.Replace("$","")));
-                cmd.Parameters.AddWithValue("@Remark", rbRemark.Text);
-                cmd.Parameters.AddWithValue("@SaleBy", userLogin.getUsername());
-
-                int r = cmd.ExecuteNonQuery();
-                if(r == 1)
-                {
-                    messageAlert.info("One record saved successfull!", "Save Record");
-                    
-                }
-                cmd.Dispose();
-
-                if (this.dataGridView1.SelectedRows.Count > 0)
-                {
-
-                    int id = int.Parse(txtID.Text);
-                    orderControl o =new orderControl();
-                    int rw = o.findRow(id);
-                    o.ItemQty--;
-                    dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
-                }
-
+                messageAlert.Warning("Please select record to save!", "Save Record");
+                return;
             }
-            catch(Exception ex)
+            else
             {
-                messageAlert.error("Error: " + ex.Message, "Error");
-            }
-            finally
-            {
-                conn.Close();
+                try
+                {
+                    conn.Open();
+                    MemoryStream ms = new MemoryStream();
+                    //save into 
+                    picOrdering.Image.Save(ms, picOrdering.Image.RawFormat);
+                    string query = "Insert Into tbOrderDetail(itemID,orderID,Qty,Price,Discount,Photo,Payment,Remark,SaleBy) Values(@itemID,@orderID,@Qty,@Price,@Discount,@Photo,@Payment,@Remark,@SaleBy)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@itemID", int.Parse(txtID.Text));
+                    cmd.Parameters.AddWithValue("@orderID", cbOrderBy.SelectedValue);
+                    cmd.Parameters.AddWithValue("@Qty", int.Parse(txtQty.Text));
+                    cmd.Parameters.AddWithValue("@Price", decimal.Parse(txtUnitPrice.Text.Replace("$", "")));
+                    cmd.Parameters.AddWithValue("@Discount", decimal.Parse(txtDiscountUnit.Text));
+                    cmd.Parameters.AddWithValue("@Photo", ms.ToArray());
+                    cmd.Parameters.AddWithValue("@Payment", decimal.Parse(lbUnitPayDollar.Text.Replace("$", "")));
+                    cmd.Parameters.AddWithValue("@Remark", rbRemark.Text);
+                    cmd.Parameters.AddWithValue("@SaleBy", userLogin.getUsername());
+
+                    int r = cmd.ExecuteNonQuery();
+                    if (r == 1)
+                    {
+                        messageAlert.info("One record saved successfull!", "Save Record");
+
+                    }
+                    cmd.Dispose();
+
+                    if (this.dataGridView1.SelectedRows.Count > 0)
+                    {
+                        if (dataGridView1.RowCount == 1)
+                        {
+                            int id = int.Parse(txtID.Text);
+                            orderControl o = new orderControl();
+                            int rw = o.findRow(id);
+                            o.ItemQty--;
+                            dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+                            formOrder d = new formOrder();
+                            d.Close();
+                        }
+                        else
+                        {
+                            int id = int.Parse(txtID.Text);
+                            orderControl o = new orderControl();
+                            int rw = o.findRow(id);
+                            o.ItemQty--;
+                            dataGridView1.Rows.RemoveAt(this.dataGridView1.SelectedRows[0].Index);
+                        }
+
+
+
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    messageAlert.error("Error: " + ex.Message, "Error");
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
     }

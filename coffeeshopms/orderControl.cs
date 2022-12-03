@@ -66,27 +66,31 @@ namespace coffeeshopms
             btnOrder.Text = $"Order ({ItemQty})";
             btnCancel.Visible = true;
             int indexRow = findRow(itemID);
-            decimal totalPrice;
+            double totalPrice;
             if (indexRow >= 0)
             {
-                 Rows[indexRow].Cells[3].Value = ItemQty;
-                 totalPrice = decimal.Parse(Price.Replace("$", "")) * ItemQty;
-                 Rows[indexRow].Cells[5].Value = totalPrice.ToString("c2");
-            }
+                Rows[indexRow].Cells[3].Value = ItemQty;
+                totalPrice = double.Parse(Price.Replace("$", "")) * ItemQty;
+                Rows[indexRow].Cells[5].Value = totalPrice.ToString("c2");
 
+                //Rows.Add(itemID, ItemName, menuID, ItemQty, Price, totalPrice, picItem);
+            }
             else
             {
-                if(ItemQty == 1)
+                if (ItemQty == 1)
                 {
                     TotalPrice = double.Parse(Price.Replace("$", ""));
                     Rows.Add(itemID, ItemName, menuID, ItemQty, Price, TotalPrice.ToString("c2"), picItem);
                 }
-                else
-                {
-                    Rows.Add(itemID, ItemName, menuID, ItemQty, Price, TotalPrice, picItem);
-                }
-                
+                //else
+                //{
+                //    Rows[indexRow].Cells[3].Value = ItemQty;
+                //    totalPrice = double.Parse(Price.Replace("$", "")) * ItemQty;
+                //    Rows[indexRow].Cells[5].Value = totalPrice.ToString("c2");
+                //    //Rows.Add(itemID, ItemName, menuID, ItemQty, Price, TotalPrice, picItem);
+                //}
             }
+
 
            
         }

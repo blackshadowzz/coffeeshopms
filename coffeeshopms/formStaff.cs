@@ -27,6 +27,7 @@ namespace coffeeshopms
         private void formStaff_Load(object sender, EventArgs e)
         {
             readData();
+            staffTotal();
             cbGender.Items.Add("Male");
             cbGender.Items.Add("Female");
             cbGender.Items.Add("Others");
@@ -34,6 +35,17 @@ namespace coffeeshopms
             //txtFullName.Enabled = false;
 
 
+        }
+        void staffTotal()
+        {
+            conn.Open();
+            string order = "SELECT COUNT(ID) from tbStaff Where isDeleted='"+0+"'";
+            SqlCommand cmd = new SqlCommand(order, conn);
+            Int32 total = (Int32)cmd.ExecuteScalar();
+            lbTotalStaff.Text ="Total Staff: "+ total.ToString();
+
+            cmd.Dispose();
+            conn.Close();
         }
         void clearData()
         {
@@ -288,6 +300,10 @@ namespace coffeeshopms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            byte[] img = (byte[])dataGridView1.CurrentRow.Cells[9].Value;
+            MemoryStream ms = new MemoryStream(img);
+            pictureBox1.Image = Image.FromStream(ms);
+
             txtID.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             txtFname.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             txtLname.Text= dataGridView1.CurrentRow.Cells[2].Value.ToString();
@@ -297,9 +313,7 @@ namespace coffeeshopms
             txtCity.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
             txtProvince.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString() ;
 
-            byte[] img = (byte[])dataGridView1.CurrentRow.Cells[9].Value;
-            MemoryStream ms = new MemoryStream(img);
-            pictureBox1.Image = Image.FromStream(ms);
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -382,6 +396,18 @@ namespace coffeeshopms
 
             adapter.Dispose();
             dt.Dispose();
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            formStaffRestore s=new formStaffRestore();
+            s.Show();
+            this.Close();
+        }
+
+        private void lbTotalStaff_Click(object sender, EventArgs e)
+        {
+            staffTotal();
         }
     }
 }

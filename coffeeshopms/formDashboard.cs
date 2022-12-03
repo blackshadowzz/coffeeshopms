@@ -51,7 +51,8 @@ namespace coffeeshopms
             bool isOpen = false; 
             foreach (Form form in Application.OpenForms) { 
                 if (form.Text == title) {
-                    isOpen = true; form.Focus(); 
+                    isOpen = true; 
+                    form.Focus(); 
                 } 
             }
             if (isOpen == false) {
@@ -68,6 +69,19 @@ namespace coffeeshopms
             lbTimer.Text ="Time: "+ dt.ToString("f");
 
             readOrder();
+
+            if (userLogin.getUserType() == "Staff")
+            {
+                btnItem.Enabled= false;
+                btnMenu.Enabled = false;
+                btnProduct.Enabled = false;
+                btnStaff.Enabled = false;
+                btnUser.Enabled = false;
+            }
+            OrderTotal();
+            totalItem();
+            totalPay();
+
         }
         void readOrder()
         {
@@ -75,7 +89,15 @@ namespace coffeeshopms
             SqlDataAdapter ad = new SqlDataAdapter(read, conn);
             DataTable dt = new DataTable();
             ad.Fill(dt);
+            dataGridView1.RowTemplate.Height = 65;
+
             dataGridView1.DataSource= dt;
+            dataGridView1.Columns[11].Visible = false;
+            dataGridView1.Columns[0].Width = 70;
+            dataGridView1.Columns[1].Width = 70;
+            dataGridView1.Columns[2].Width = 70;
+            DataGridViewImageColumn imcol = (DataGridViewImageColumn)dataGridView1.Columns[7];
+            imcol.ImageLayout = DataGridViewImageCellLayout.Zoom;
 
             ad.Dispose();
             dt.Dispose();
@@ -111,7 +133,48 @@ namespace coffeeshopms
             }
         }
 
-        
+        void OrderTotal()
+        {
+            conn.Open();
+            string order = "SELECT COUNT(DetailID) from tbOrderDetail";
+            SqlCommand cmd = new SqlCommand(order, conn);
+            Int32 total = (Int32)cmd.ExecuteScalar();
+            lbTotalOrdering.Text = total.ToString();
+
+            cmd.Dispose();
+            conn.Close();
+        }
+        void totalItem()
+        {
+            conn.Open();
+            string item = "SELECT COUNT(itemID) from tbItem Where isDeleted='"+0+"'";
+            SqlCommand cmd = new SqlCommand(item, conn);
+            Int32 total = (Int32)cmd.ExecuteScalar();
+            lbTotalItem.Text = total.ToString();
+
+            cmd.Dispose();
+            conn.Close();
+        }
+        void totalPay()
+        {
+            //try
+            //{
+
+
+            //    double pay = 0;
+            //    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            //    {
+            //        pay += double.Parse(dataGridView1.Rows[i].Cells[8].Value + "");
+            //        pay += double.Parse(pa);
+
+            //    }
+            //    lbPayment.Text = pay.ToString("c2");
+            //}
+            //catch (Exception ex)
+            //{
+            //    messageAlert.Warning(ex.Message, "Warning");
+            //}
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -120,9 +183,10 @@ namespace coffeeshopms
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-            formUserLogin l=new formUserLogin();
+            formUserLogin l = new formUserLogin();
             l.Show();
+            this.Hide();
+            
         }
 
         private void btnBackHome_Click(object sender, EventArgs e)
@@ -139,7 +203,7 @@ namespace coffeeshopms
 
         private void btnOrdering_Click(object sender, EventArgs e)
         {
-            openForm(new formOrder(), "Order Management Form");
+            openForm(new formOrderingItem(), "Form Ordering");
         }
 
         private void btnStaff_Click(object sender, EventArgs e)
@@ -150,6 +214,29 @@ namespace coffeeshopms
         private void btnUser_Click(object sender, EventArgs e)
         {
             openForm(new formUser(), "User Management Form");
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            OrderTotal();
+            totalItem();
+            totalPay();
+            readOrder();
         }
     }
 }
